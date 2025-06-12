@@ -4,6 +4,11 @@ defmodule SemanticEvaluatorTest do
 
   test "validate simple conditions" do
     ctx = %{"foo" => true, "bar" => false, "wadus" => true, "text_a" => "aaa", "text_b" => "bbb"}
+
+    assert SemanticEvaluator.eval!("foo == true", ctx) == true
+    assert SemanticEvaluator.eval!("bar == false", ctx) == true
+    assert SemanticEvaluator.eval!("unset == nil", ctx) == true
+
     assert SemanticEvaluator.eval!("!text_c", ctx) == true
     assert SemanticEvaluator.eval!("!text_a", ctx) == false
     assert SemanticEvaluator.eval!("!!text_a", ctx) == true

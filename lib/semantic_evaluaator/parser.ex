@@ -9,6 +9,10 @@ defmodule SemanticEvaluator.Parser do
   end
 
   # atomic terms
+  defp _parse(:true, _ctx), do: true
+  defp _parse(:false, _ctx), do: false
+  defp _parse(:nil, _ctx), do: nil
+
   defp _parse(term, ctx) when is_atom(term) do
     cond do
       Map.has_key? ctx, term -> Map.get(ctx, term)
